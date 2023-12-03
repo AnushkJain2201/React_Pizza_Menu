@@ -1,6 +1,7 @@
 // First thing that we have to write is this two imports.
 import React from "react";
 import ReactDOM from "react-dom/client";
+import './index.css';
 
 // Data copied from data.js
 const pizzaData = [
@@ -52,7 +53,7 @@ const pizzaData = [
 // Components are actually function which return renderable HTML, just like this App component
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
 
       <Menu />
@@ -63,18 +64,22 @@ function App() {
 }
 
 const Header = () => {
-  return <h1>Fast React Pizza Co.</h1>
+  return (
+    <header className="header">
+      <h1>Fast React Pizza Co.</h1>
+    </header>
+  );
 }
 
 const Menu = () => {
   return (
-    <div>
+    <main className="menu">
       <h2>Our Menu</h2>
       <Pizza />
       <Pizza />
       <Pizza />
       <Pizza />
-    </div>
+    </main>
   );
 }
 
@@ -88,7 +93,7 @@ const Footer = () => {
   // A trial but not good 
   // if(hour >= openHour && hour <= closeHour) alert("We're currently open!"); else alert("Sorry, we're closed");
 
-  return <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
+  return <footer className="footer">{new Date().toLocaleTimeString()}. We're currently open</footer>
   // Just retrning an element using the createElement method to show you how bad of an idea it is.
   // return React.createElement('footer', null, "We're currently open!");
 }
@@ -99,7 +104,7 @@ const Pizza = () => {
     <div>
       {/* img tag must have alt prop as per eslint rule */}
       <img src="pizzas/funghi.jpg" alt="funghi" />
-      <h2>Pizza Funghi</h2>
+      <h3>Pizza Funghi</h3>
       <p>Tomato, mozarella, mushrooms, and onion</p>
     </div>
   );
