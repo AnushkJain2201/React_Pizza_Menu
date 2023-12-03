@@ -53,18 +53,39 @@ const pizzaData = [
 function App() {
   return (
     <div>
-      <h1>Hello React!!!</h1>
+      <Header />
 
-      {/* Here reusing the Pizza component */}
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <Menu />
+
+      <Footer />
     </div>
   ); 
 }
 
+const Header = () => {
+  return <h1>Fast React Pizza Co.</h1>
+}
+
+const Menu = () => {
+  return (
+    <div>
+      <h2>Our Menu</h2>
+      <Pizza />
+      <Pizza />
+      <Pizza />
+      <Pizza />
+    </div>
+  );
+}
+
+const Footer = () => {
+  return <footer>{new Date().toLocaleTimeString()}. We're currently open</footer>
+  // Just retrning an element using the createElement method to show you how bad of an idea it is.
+  // return React.createElement('footer', null, "We're currently open!");
+}
+
 // Can also use arrow functions
-let Pizza = () => {
+const Pizza = () => {
   return (
     <div>
       {/* img tag must have alt prop as per eslint rule */}
