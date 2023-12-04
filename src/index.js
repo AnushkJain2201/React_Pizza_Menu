@@ -75,11 +75,29 @@ const Menu = () => {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+
+      {/* Here, if the value of the props are strings, we can directly write them into the quotation but for it to be not a string we have to use JS mode as we did in the price prop */}
+
+      <Pizza name='Pizza Spinaci' ingredients='Tomato, mozarella, spinach, and ricotta cheese' photoName='pizzas/spinaci.jpg' price={10}/>
+
+      <Pizza name='Pizza Funghi' ingredients='Tomato, mozarella, mushrooms, and onion' photoName='pizzas/funghi.jpg' price={12}/>
+
     </main>
+  );
+}
+
+// Can also use arrow functions
+const Pizza = (props) => {
+  return (
+    <div className="pizza">
+      {/* img tag must have alt prop as per eslint rule */}
+      <img src={props.photoName} alt={props.name} />
+      <div>  
+        <h3>{props.name}</h3>
+        <p>{props.ingredients}</p>
+        <span>{props.price}</span>
+      </div>
+    </div>
   );
 }
 
@@ -94,21 +112,11 @@ const Footer = () => {
   // if(hour >= openHour && hour <= closeHour) alert("We're currently open!"); else alert("Sorry, we're closed");
 
   return <footer className="footer">{new Date().toLocaleTimeString()}. We're currently open</footer>
-  // Just retrning an element using the createElement method to show you how bad of an idea it is.
+  // Just returning an element using the createElement method to show you how bad of an idea it is.
   // return React.createElement('footer', null, "We're currently open!");
 }
 
-// Can also use arrow functions
-const Pizza = () => {
-  return (
-    <div>
-      {/* img tag must have alt prop as per eslint rule */}
-      <img src="pizzas/funghi.jpg" alt="funghi" />
-      <h3>Pizza Funghi</h3>
-      <p>Tomato, mozarella, mushrooms, and onion</p>
-    </div>
-  );
-}
+
 
 // Now we use createRoot() method to create a root component in which all our component will render.
 // this root component is present in the index.html of public folder that we ger here using the document.getElementById() method.
