@@ -163,12 +163,8 @@ const Footer = () => {
 
     return (
     <footer className="footer">
-
-        <div className="order">
-          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
-          
-          <button className="btn">Order</button>
-        </div>
+      <Order closeHour={closeHour} />
+       
 
 
       {/* Now, using ternary operator */}
@@ -192,6 +188,17 @@ const Footer = () => {
   );
   // Just returning an element using the createElement method to show you how bad of an idea it is.
   // return React.createElement('footer', null, "We're currently open!");
+}
+
+const Order = (props) => {
+
+  return (
+    <div className="order">
+    <p>We're open until {props.closeHour}:00. Come visit us or order online.</p>
+    
+    <button className="btn">Order</button>
+  </div>
+  );
 }
 
 
