@@ -122,6 +122,10 @@ const Menu = () => {
 
 // Can also use arrow functions
 const Pizza = (props) => {
+
+  // Using conditional rendering using the multiple returns
+  if(props.pizzaObj.soldOut) return null;
+
   return (
     <li className="pizza">
       {/* img tag must have alt prop as per eslint rule */}
@@ -145,17 +149,36 @@ const Footer = () => {
   // A trial but not good 
   // if(hour >= openHour && hour <= closeHour) alert("We're currently open!"); else alert("Sorry, we're closed");
 
-  return (
+  // Now, Conditional rendering with multiple return
+  // Here, we are out of return statement so, we can write any JS we want. So, here we can use the if statement
+
+  // Here if the first return donot work due to the condition, it will return the second return statement
+
+  if(!isOpen)
+    return (
+      <p>
+        We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+      </p>
+    );
+
+    return (
     <footer className="footer">
 
-      {/* Now, using ternary operator */}
-      {isOpen ? (
         <div className="order">
           <p>We're open until {closeHour}:00. Come visit us or order online.</p>
           
           <button className="btn">Order</button>
         </div>
-      ) : <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
+
+
+      {/* Now, using ternary operator */}
+      {/* {isOpen ? (
+        <div className="order">
+          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+          
+          <button className="btn">Order</button>
+        </div>
+      ) : <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>} */}
 
       {/* Here, we are using the shortcicuiting with the and operator */}
       {/* {isOpen && (
