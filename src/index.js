@@ -72,15 +72,49 @@ const Header = () => {
 }
 
 const Menu = () => {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
+      {/* Here we are iterating over the pizzaData array using the map function to create as much Pizza element as the element of arrry and we can pass the props in the element dynamically. */}
+      {/* <div>
+        {pizzaData.map(pizza => <Pizza name={pizza.name} ingredients={pizza.ingredients} photoName={pizza.photoName} price={pizza.price} />)}
+      </div> */}
+
+      {/* Instead of passing all properties of pizza object we pass the pizza object directly and take out the properties of this object inside the component itself. */}
+
+      {/* Here we are checking if pizzaData array is not empty then only we will show the Pizza element */}
+
+      {/* Using ternary operator */}
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+        {pizzaData.map(pizza => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
+      ) : <p>We're still working on our menu. Please come back later :)</p>}
+      
+      {/* Using && operator and short circuiting
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+        {pizzaData.map(pizza => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
+      )} */}
+      
+      
+      
+
       {/* Here, if the value of the props are strings, we can directly write them into the quotation but for it to be not a string we have to use JS mode as we did in the price prop */}
 
-      <Pizza name='Pizza Spinaci' ingredients='Tomato, mozarella, spinach, and ricotta cheese' photoName='pizzas/spinaci.jpg' price={10}/>
+      {/* <Pizza name='Pizza Spinaci' ingredients='Tomato, mozarella, spinach, and ricotta cheese' photoName='pizzas/spinaci.jpg' price={10}/>
 
-      <Pizza name='Pizza Funghi' ingredients='Tomato, mozarella, mushrooms, and onion' photoName='pizzas/funghi.jpg' price={12}/>
+      <Pizza name='Pizza Funghi' ingredients='Tomato, mozarella, mushrooms, and onion' photoName='pizzas/funghi.jpg' price={12}/> */}
 
     </main>
   );
@@ -89,15 +123,15 @@ const Menu = () => {
 // Can also use arrow functions
 const Pizza = (props) => {
   return (
-    <div className="pizza">
+    <li className="pizza">
       {/* img tag must have alt prop as per eslint rule */}
-      <img src={props.photoName} alt={props.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>  
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -111,7 +145,28 @@ const Footer = () => {
   // A trial but not good 
   // if(hour >= openHour && hour <= closeHour) alert("We're currently open!"); else alert("Sorry, we're closed");
 
-  return <footer className="footer">{new Date().toLocaleTimeString()}. We're currently open</footer>
+  return (
+    <footer className="footer">
+
+      {/* Now, using ternary operator */}
+      {isOpen ? (
+        <div className="order">
+          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+          
+          <button className="btn">Order</button>
+        </div>
+      ) : <p>We're happy to welcome you between {openHour}:00 and {closeHour}:00.</p>}
+
+      {/* Here, we are using the shortcicuiting with the and operator */}
+      {/* {isOpen && (
+        <div className="order">
+          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+          
+          <button className="btn">Order</button>
+        </div>
+      )} */}
+    </footer>
+  );
   // Just returning an element using the createElement method to show you how bad of an idea it is.
   // return React.createElement('footer', null, "We're currently open!");
 }
