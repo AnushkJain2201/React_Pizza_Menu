@@ -121,19 +121,23 @@ const Menu = () => {
 }
 
 // Can also use arrow functions
-const Pizza = (props) => {
+// Now, we can destucture the props istead of passing the props directly.
+// const Pizza = (props) => {
+
+const Pizza = ({pizzaObj}) => {
 
   // Using conditional rendering using the multiple returns
-  if(props.pizzaObj.soldOut) return null;
+  // Now, as we are using the destructured props object, we have taken out the pizzaObj out of props object, so instead of writing props everytime, we don't have to write it anymore
+  if(pizzaObj.soldOut) return null;
 
   return (
     <li className="pizza">
       {/* img tag must have alt prop as per eslint rule */}
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>  
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -190,11 +194,11 @@ const Footer = () => {
   // return React.createElement('footer', null, "We're currently open!");
 }
 
-const Order = (props) => {
+const Order = ({closeHour}) => {
 
   return (
     <div className="order">
-    <p>We're open until {props.closeHour}:00. Come visit us or order online.</p>
+    <p>We're open until {closeHour}:00. Come visit us or order online.</p>
     
     <button className="btn">Order</button>
   </div>
