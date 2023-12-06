@@ -133,16 +133,19 @@ const Menu = () => {
 const Pizza = ({ pizzaObj }) => {
   // Using conditional rendering using the multiple returns
   // Now, as we are using the destructured props object, we have taken out the pizzaObj out of props object, so instead of writing props everytime, we don't have to write it anymore
-  if (pizzaObj.soldOut) return null;
+  // if (pizzaObj.soldOut) return null;
 
   return (
-    <li className="pizza">
+
+    // Here we are consitionally rendering the class name using the template string and ternary operator.
+    <li className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}`}>
       {/* img tag must have alt prop as per eslint rule */}
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
-        <span>{pizzaObj.price}</span>
+        {/* Here conditionally rendering the text. If the pizza is sold out, we will show the text SOLD OUT otherwise we will show the price of the pizza */}
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
