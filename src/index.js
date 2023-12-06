@@ -1,7 +1,7 @@
 // First thing that we have to write is this two imports.
 import React from "react";
 import ReactDOM from "react-dom/client";
-import './index.css';
+import "./index.css";
 
 // Data copied from data.js
 const pizzaData = [
@@ -49,7 +49,6 @@ const pizzaData = [
   },
 ];
 
-
 // Components are actually function which return renderable HTML, just like this App component
 function App() {
   return (
@@ -60,7 +59,7 @@ function App() {
 
       <Footer />
     </div>
-  ); 
+  );
 }
 
 const Header = () => {
@@ -69,7 +68,7 @@ const Header = () => {
       <h1>Fast React Pizza Co.</h1>
     </header>
   );
-}
+};
 
 const Menu = () => {
   const pizzas = pizzaData;
@@ -91,13 +90,24 @@ const Menu = () => {
 
       {/* Using ternary operator */}
       {numPizzas > 0 ? (
-        <ul className="pizzas">
-        {pizzaData.map(pizza => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
-      ) : <p>We're still working on our menu. Please come back later :)</p>}
-      
+
+        // Rect fragment is used here to return multiple elements.
+        <>
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone oven, all organic, all delicious.
+          </p>
+
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We're still working on our menu. Please come back later :)</p>
+      )}
+
       {/* Using && operator and short circuiting
       {numPizzas > 0 && (
         <ul className="pizzas">
@@ -106,42 +116,37 @@ const Menu = () => {
         ))}
       </ul>
       )} */}
-      
-      
-      
 
       {/* Here, if the value of the props are strings, we can directly write them into the quotation but for it to be not a string we have to use JS mode as we did in the price prop */}
 
       {/* <Pizza name='Pizza Spinaci' ingredients='Tomato, mozarella, spinach, and ricotta cheese' photoName='pizzas/spinaci.jpg' price={10}/>
 
       <Pizza name='Pizza Funghi' ingredients='Tomato, mozarella, mushrooms, and onion' photoName='pizzas/funghi.jpg' price={12}/> */}
-
     </main>
   );
-}
+};
 
 // Can also use arrow functions
 // Now, we can destucture the props istead of passing the props directly.
 // const Pizza = (props) => {
 
-const Pizza = ({pizzaObj}) => {
-
+const Pizza = ({ pizzaObj }) => {
   // Using conditional rendering using the multiple returns
   // Now, as we are using the destructured props object, we have taken out the pizzaObj out of props object, so instead of writing props everytime, we don't have to write it anymore
-  if(pizzaObj.soldOut) return null;
+  if (pizzaObj.soldOut) return null;
 
   return (
     <li className="pizza">
       {/* img tag must have alt prop as per eslint rule */}
       <img src={pizzaObj.photoName} alt={pizzaObj.name} />
-      <div>  
+      <div>
         <h3>{pizzaObj.name}</h3>
         <p>{pizzaObj.ingredients}</p>
         <span>{pizzaObj.price}</span>
       </div>
     </li>
   );
-}
+};
 
 const Footer = () => {
   const hour = new Date().getHours();
@@ -150,7 +155,7 @@ const Footer = () => {
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
 
-  // A trial but not good 
+  // A trial but not good
   // if(hour >= openHour && hour <= closeHour) alert("We're currently open!"); else alert("Sorry, we're closed");
 
   // Now, Conditional rendering with multiple return
@@ -158,18 +163,16 @@ const Footer = () => {
 
   // Here if the first return donot work due to the condition, it will return the second return statement
 
-  if(!isOpen)
+  if (!isOpen)
     return (
       <p>
         We're happy to welcome you between {openHour}:00 and {closeHour}:00.
       </p>
     );
 
-    return (
+  return (
     <footer className="footer">
       <Order closeHour={closeHour} />
-       
-
 
       {/* Now, using ternary operator */}
       {/* {isOpen ? (
@@ -192,20 +195,17 @@ const Footer = () => {
   );
   // Just returning an element using the createElement method to show you how bad of an idea it is.
   // return React.createElement('footer', null, "We're currently open!");
-}
+};
 
-const Order = ({closeHour}) => {
-
+const Order = ({ closeHour }) => {
   return (
     <div className="order">
-    <p>We're open until {closeHour}:00. Come visit us or order online.</p>
-    
-    <button className="btn">Order</button>
-  </div>
+      <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+
+      <button className="btn">Order</button>
+    </div>
   );
-}
-
-
+};
 
 // Now we use createRoot() method to create a root component in which all our component will render.
 // this root component is present in the index.html of public folder that we ger here using the document.getElementById() method.
@@ -214,9 +214,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // This will render our App component using the div with id root in the index.html.
 root.render(
-    // We can wrap the root component i.e. App in the <React.StrictMode> tag to enable the strict mode.
-    // The only thing it does is that during development it will render our components twice in order to find certain bugs and also check if we are using outdated parts of the React API.
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+  // We can wrap the root component i.e. App in the <React.StrictMode> tag to enable the strict mode.
+  // The only thing it does is that during development it will render our components twice in order to find certain bugs and also check if we are using outdated parts of the React API.
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
